@@ -310,9 +310,7 @@ every 1 seconds:
 			wait 5 seconds
 			send title "&a&lKoodaajat&f:" with subtitle "&fMcTykki" to all players for 3 seconds
 			wait 3 seconds
-			send title "&e&lRakentajat&f:" with subtitle "&fTylsa" to all players for 3 seconds
-			wait 3 seconds
-			send title "&6&lKiitos pelaamisesta" with subtitle "&fNyt ette anna tohtorille kuoleman uhkauksia!" to all players for 3 seconds
+			send title "&6&lKiitos pelaamisesta" with subtitle "&eyoutube.com/@RealTykki" to all players for 3 seconds
 			play sound "entity.generic.explode" to all players
             
 
@@ -330,13 +328,6 @@ command /revive <player>:
 		set {PELAAJA::%arg-1%} to true
 		play sound "entity.generic.explode" to all players
         
-        
-
-        
-command /addyksi:	
-	permission: op
-	trigger:
-		add 1 to {hengissä}
         
 command /elossa:
 	trigger:
