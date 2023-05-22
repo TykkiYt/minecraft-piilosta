@@ -239,9 +239,6 @@ command /etsijä <player>:
 		give player rabbit foot named "&cLoikka 5x"
 		give player bell named "&bPienennä aluetta"
 
-command /skull:
-	trigger:
-		broadcast "%player%: ☠"
         
 on damage:
 	if world is "%{maailma}%":
@@ -266,8 +263,6 @@ on death:
 		remove victim from {VOITTO::*}
 		remove 1 from {hengissä}
 		set {PELAAJA::%victim%} to false
-
-
 
 
 
@@ -299,20 +294,8 @@ on player world change:
 	else:
 		wait 1 tick
 
-        
-on player world change:
-	clear player's scoreboard
 
     
-on chat:
-	if player has permission "op":
-		cancel event
-		broadcast "{@op} &f%player%: %message%"
-	else:
-		cancel event
-		broadcast "&7&lJäsen &f%player%: %message%"
-        
-        
 every 1 seconds:
 	if {game} is true:
 		if {hengissä} is 1:
@@ -334,14 +317,6 @@ every 1 seconds:
             
 
 
-command /tapahtumat:
-	trigger:
-		if {game} is false:
-			teleport player to {event}
-command /setevent:
-	permission: op
-	trigger:
-		set {event} to location of player
         
 command /revive <player>:
 	permission: op
@@ -367,28 +342,9 @@ command /elossa:
 	trigger:
 		send "%{VOITTO::*}%"
         
-command /kaksietsijää <player> <player>:
-	permission: op
-	trigger:
-		delete {ETSIJÄ::*}
-		add arg-1 to {ETSIJÄ::*}
-		add arg-2 to {ETSIJÄ::*}
-		broadcast "&e%{ETSIJÄ::*}% &6Ovat nyt etsijiä!"
-		give player unbreakable diamond sword named "&x&f&f&7&b&2&5&lP&x&f&f&8&4&2&2&lu&x&f&f&8&e&1&f&lu&x&f&f&9&7&1&c&lk&x&f&f&a&1&1&9&lk&x&f&f&a&a&1&6&lo"
-		give player rabbit foot named "&aLoikka 3x"
-		give player rabbit foot named "&cLoikka 5x"
-		give player bell named "&bPienennä aluetta"
-		give arg-2 unbreakable diamond sword named "&x&f&f&7&b&2&5&lP&x&f&f&8&4&2&2&lu&x&f&f&8&e&1&f&lu&x&f&f&9&7&1&c&lk&x&f&f&a&1&1&9&lk&x&f&f&a&a&1&6&lo"
-		give arg-2 rabbit foot named "&aLoikka 3x"
-		give arg-2 rabbit foot named "&cLoikka 5x"
-		give arg-2 bell named "&bPienennä aluetta"
 		
 
 		
-command /viesti <text>:
-	permission: op
-	trigger:
-		broadcast "%arg-1%"
 command /poista <player>:
 	permission: op
 	trigger:
