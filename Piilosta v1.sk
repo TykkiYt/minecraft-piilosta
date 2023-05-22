@@ -1,0 +1,398 @@
+# TÄMÄN KOODIN ON TEHNYT TYKKI!
+# YouTube: youtube.com/@RealTykki
+# GitHub: https://github.com/Tykkiproo12/minecraft-piilosta/
+# Bugit: https://github.com/Tykkiproo12/minecraft-piilosta/
+
+
+
+
+command /resetpiilosta:
+    permission: op
+    trigger:
+        set {hengissä} to 0
+        make player execute command "/worldborder set 448"
+        set {alue1} to false
+        set {alue2} to false
+        set {alue3} to false
+        set {alue4} to false
+        set {alue5} to false
+        set {alue6} to false
+        set {game} to false
+        delete {PELAAJA::}
+        delete {ETSIJÄ::}
+        delete {VOITTO::}
+
+on player world change:
+    clear player's scoreboard
+on leave:
+    if {PELAAJA::%player%} is true:
+        remove 1 from {hengissä}
+        remove player from {PELAAJA::}
+        remove player from {VOITTO::*}
+        set {PELAAJA::%player%} to false
+
+
+
+
+
+
+
+command /maailma <text>:
+	permission: op
+	trigger:
+		set {maailma} to "%arg-1%"
+
+
+
+
+options:
+	start2: &x&f&f&e&f&0&0&lM&x&f&b&e&2&0&2&li&x&f&6&d&6&0&4&ln&x&f&2&c&9&0&6&le&x&e&e&b&d&0&8&lc&x&e&9&b&0&0&a&lr&x&e&5&a&3&0&c&la&x&e&1&9&7&0&e&lf&x&d&c&8&a&1&0&lt &x&d&b&8&b&1&4&lp&x&d&d&9&a&1&a&li&x&d&f&a&8&2&1&li&x&e&1&b&7&2&7&ll&x&e&2&c&5&2&d&lo&x&e&4&d&4&3&3&ls&x&e&6&e&2&3&a&lt&x&e&8&f&1&4&0&la&x&e&a&f&f&4&6&l!
+	title: &x&1&a&f&b&0&0&lP&x&2&5&f&9&2&4&li&x&3&1&f&8&4&8&li&x&3&c&f&6&6&c&ll&x&4&7&f&4&9&1&lo&x&5&2&f&2&b&5&ls&x&5&e&f&1&d&9&lt&x&6&9&e&f&f&d&la
+    
+command /setpiilospawn:
+	permission: op
+	trigger:
+		set {spawn2} to location of player
+
+    
+command /aloita:
+	permission: op
+	trigger:
+		delete {PELAAJA::*}
+		loop all players:
+			if loop-player's gamemode is survival:
+				add 1 to {hengissä}
+				add loop-player to {PELAAJA::*}
+				add loop-player to {VOITTO::*}
+				set {PELAAJA::%loop-player%} to true
+		set {game} to true
+		send title "{@start2}" with subtitle "&f" to all players for 3 seconds
+		play sound "entity.generic.explode" to all players
+		wait 5 seconds
+		send title "&6&l3" with subtitle "&f" to all players
+		play sound "minecraft:block.note_block.pling" with volume 10 and pitch 1.1 to all players
+		wait 1 seconds
+		send title "&e&l2" to all players
+		play sound "minecraft:block.note_block.pling" with volume 10 and pitch 1.2 to all players
+		wait 1 seconds
+		send title "&c&l1" to all players
+		play sound "minecraft:block.note_block.pling" with volume 10 and pitch 1.3 to all players
+		wait 1 seconds
+		send title "&6&lLähde piiloon!" to all players
+		play sound "minecraft:block.note_block.pling" with volume 30 and pitch 1.9 to all players
+		wait 0.05 seconds
+		play sound "minecraft:block.note_block.pling" with volume 30 and pitch 1.9 to all players
+		wait 0.05 seconds
+		play sound "minecraft:block.note_block.pling" with volume 30 and pitch 1.9 to all players
+		wait 0.05 seconds
+		play sound "minecraft:block.note_block.pling" with volume 30 and pitch 1.9 to all players
+		wait 0.1 seconds
+		give 4 of ender pearl named "&5Pearli" to all players
+		apply slowness 255 without any particles to player for 60 seconds
+		apply darkness 255 without any particles to player for 60 seconds
+		remove 1 from {hengissä}
+		remove player from {PELAAJA::*}
+		remove player from {VOITTO::*}
+		teleport all players to {spawn2}
+
+		
+on right click:
+	if player's tool is bell:
+		if name of the player's tool is "&bPienennä aluetta":
+			if {alue1} is false:
+				broadcast ""
+				broadcast "          &6&lILMOITUS"
+				broadcast ""
+				broadcast "&6%{ETSIJÄ::*}% &epienensi aluetta!"
+				broadcast ""
+				broadcast "&cAlue liikkuuu &62 &cminuutin ajan."
+				broadcast ""
+				make player execute command "/worldborder set 350 120"
+				set {alue1} to true
+			else if {alue2} is false:
+				broadcast ""
+				broadcast "          &6&lILMOITUS"
+				broadcast ""
+				broadcast "&6%{ETSIJÄ::*}% &cpienensi aluetta!"
+				broadcast "&cAlue liikkuuu 2 minuutin ajan."
+				broadcast ""
+				make player execute command "/worldborder set 280 120"
+				set {alue2} to true
+			else if {alue3} is false:
+				broadcast ""
+				broadcast "          &6&lILMOITUS"
+				broadcast ""
+				broadcast "&6%{ETSIJÄ::*}% &cpienensi aluetta!"
+				broadcast "&cAlue liikkuuu 2 minuutin ajan."
+				broadcast ""
+				make player execute command "/worldborder set 210 120"
+				set {alue3} to true
+			else if {alue4} is false:
+				broadcast ""
+				broadcast "          &6&lILMOITUS"
+				broadcast ""
+				broadcast "&6%{ETSIJÄ::*}% &cpienensi aluetta!"
+				broadcast "&cAlue liikkuuu 2 minuutin ajan."
+				broadcast ""
+				make player execute command "/worldborder set 180 120"
+				set {alue4} to true
+			else if {alue5} is false:
+				broadcast ""
+				broadcast "          &6&lILMOITUS"
+				broadcast ""
+				broadcast "&6%{ETSIJÄ::*}% &cpienensi aluetta!"
+				broadcast "&cAlue liikkuuu 2 minuutin ajan."
+				broadcast ""
+				make player execute command "/worldborder set 120 120"
+				set {alue5} to true
+			else if {alue6} is false:
+				broadcast ""
+				broadcast "          &6&lILMOITUS"
+				broadcast ""
+				broadcast "&6%{ETSIJÄ::*}% &cpienensi aluetta!"
+				broadcast "&cAlue liikkuuu 2 minuutin ajan."
+				broadcast ""
+				make player execute command "/worldborder set 75 120"
+				set {alue6} to true
+
+
+
+on right click:
+	if player's tool is rabbit foot:
+		if name of the player's tool is "&aLoikka 3x":
+			push player upwards with speed 2
+on right click:
+	if player's tool is rabbit foot:
+		if name of the player's tool is "&cLoikka 5x":
+			push player upwards with speed 4
+
+command /arpa <number>:
+	permission: op
+	trigger:
+		give arg-1 of paper named "&a&lArpa" to all players 
+        
+on right click:
+	if player's tool is paper:
+		if name of the player's tool is "&a&lArpa":
+			chance of 25%:
+				apply slowness 2 to {ETSIJÄ::*} for 15 seconds
+				broadcast ""
+				broadcast "             &6&lILMOITUS"
+				broadcast ""
+				broadcast "&6%player% &cAvasi etsijälle slownessin!"
+				broadcast ""				
+				play sound "entity.generic.explode" to all players
+				remove 1 paper from player
+				stop
+			chance of 25%:
+				apply speed 2 to player for 10 seconds
+				send "&eSait speedin!" to player
+				play sound "entity.generic.explode" to player
+				remove 1 paper from player
+				stop
+			chance of 25%:
+				give player ender pearl named "&5Pearli"
+				send "&eSait pearlin!" to player
+				play sound "entity.generic.explode" to player
+				remove 1 paper from player
+				stop
+			chance of 25%:
+				apply slowness 2 without any particles to all players for 30 seconds
+				send "&eSait slownessin!"
+				play sound "entity.generic.explode" to player
+				remove 1 paper from player
+				stop
+			chance of 25%:
+				apply glowing 2 without any particles to all players for 30 seconds
+				broadcast ""
+				broadcast "                &6&lILMOITUS"
+				broadcast ""
+				broadcast "&6%player% &cAvasi jokaiselle pelaajalle glowingin!"
+				broadcast ""
+				play sound "entity.generic.explode" to player
+				remove 1 paper from player
+				stop
+			chance of 25%:
+				apply darkness 2 without any particles to all players for 30 seconds
+				broadcast ""
+				broadcast "                  &6&lILMOITUS"
+				broadcast ""
+				broadcast "&6%player% &cAvasi jokaiselle pelaajalle darknessin!"
+				broadcast ""
+				remove 1 paper from player
+				stop
+			chance of 25%:
+				apply invisibility without any particles to player for 20 seconds
+				send "&eSait näkymättömyyden"
+				remove 1 paper from player
+				stop
+
+
+command /etsijä <player>:
+	permission: op
+	trigger:
+		delete {ETSIJÄ::*}
+		add arg-1 to {ETSIJÄ::*}
+		broadcast "&e%arg-1% &6On nyt etsijä!"
+		give player unbreakable diamond sword named "&x&f&f&7&b&2&5&lP&x&f&f&8&4&2&2&lu&x&f&f&8&e&1&f&lu&x&f&f&9&7&1&c&lk&x&f&f&a&1&1&9&lk&x&f&f&a&a&1&6&lo"
+		give player rabbit foot named "&aLoikka 3x"
+		give player rabbit foot named "&cLoikka 5x"
+		give player bell named "&bPienennä aluetta"
+
+command /skull:
+	trigger:
+		broadcast "%player%: ☠"
+        
+on damage:
+	if world is "%{maailma}%":
+		if attacker is player:
+			if attacker is not {ETSIJÄ::*}:
+				cancel event
+			else:
+				remove victim from {PELAAJA::*}
+				set {PELAAJA::%victim%} to false
+				remove 1 from {hengissä}
+				broadcast "&6%{ETSIJÄ::*}% &clöysi pelaajan &6%victim%!"
+				kill victim
+				remove victim from {VOITTO::*}
+				stop
+            
+                
+on death:
+	wait 2 seconds
+	if {PELAAJA::%victim%} is true:
+		broadcast "&6%victim% &cKuoli"
+		remove victim from {PELAAJA::*}
+		remove victim from {VOITTO::*}
+		remove 1 from {hengissä}
+		set {PELAAJA::%victim%} to false
+
+
+
+
+
+
+
+            
+on respawn:
+	if player is in world "%{maailma}%":
+		set player's gamemode to spectator
+        
+        
+on player world change:
+	if player is in world "%{maailma}%":
+		set title of player's scoreboard to "{@title}"
+		set line 15 of player's scoreboard to ""
+		set line 14 of player's scoreboard to "<##3158ff>&l» &bEtsijä: &6%{ETSIJÄ::*}%"
+		set line 13 of player's scoreboard to ""
+		set line 12 of player's scoreboard to "<##3158ff>&l» &bPelaajia hengissä: &6%{hengissä}%"
+		set line 11 of player's scoreboard to ""
+		wait 1 tick
+		while player is online:
+			set title of player's scoreboard to "{@title}"
+			set line 15 of player's scoreboard to ""
+			set line 14 of player's scoreboard to "<##3158ff>&l» &bEtsijä: &6%{ETSIJÄ::*}%"
+			set line 13 of player's scoreboard to ""
+			set line 12 of player's scoreboard to "<##3158ff>&l» &bPelaajia hengissä: &6%{hengissä}%"
+			set line 11 of player's scoreboard to ""
+			wait 1 tick
+	else:
+		wait 1 tick
+
+        
+on player world change:
+	clear player's scoreboard
+
+    
+on chat:
+	if player has permission "op":
+		cancel event
+		broadcast "{@op} &f%player%: %message%"
+	else:
+		cancel event
+		broadcast "&7&lJäsen &f%player%: %message%"
+        
+        
+every 1 seconds:
+	if {game} is true:
+		if {hengissä} is 1:
+			set {game} to false
+			send title "&a%{VOITTO::*}%" with subtitle "&aVoitti :)!" to all players for 3 seconds
+			play sound "ui.toast.challenge_complete" to all players
+			loop all players:
+				set loop-player's gamemode to spectator
+				teleport loop-player to {spawn2}
+			loop {PELAAJA::*}:
+				set {PELAAJA::*}'s gamemode to survival
+			wait 5 seconds
+			send title "&a&lKoodaajat&f:" with subtitle "&fMcTykki" to all players for 3 seconds
+			wait 3 seconds
+			send title "&e&lRakentajat&f:" with subtitle "&fTylsa" to all players for 3 seconds
+			wait 3 seconds
+			send title "&6&lKiitos pelaamisesta" with subtitle "&fNyt ette anna tohtorille kuoleman uhkauksia!" to all players for 3 seconds
+			play sound "entity.generic.explode" to all players
+            
+
+
+command /tapahtumat:
+	trigger:
+		if {game} is false:
+			teleport player to {event}
+command /setevent:
+	permission: op
+	trigger:
+		set {event} to location of player
+        
+command /revive <player>:
+	permission: op
+	trigger:
+		set arg-1's gamemode to survival
+		teleport arg-1 to {spawn2}
+		send title "&e%arg-1%" with subtitle "&fSynnytettiin uudelleen!"
+		add 1 to {hengissä}
+		add arg-1 to {PELAAJA::*}
+		add arg-1 to {VOITTO::*}
+		set {PELAAJA::%arg-1%} to true
+		play sound "entity.generic.explode" to all players
+        
+        
+
+        
+command /addyksi:	
+	permission: op
+	trigger:
+		add 1 to {hengissä}
+        
+command /elossa:
+	trigger:
+		send "%{VOITTO::*}%"
+        
+command /kaksietsijää <player> <player>:
+	permission: op
+	trigger:
+		delete {ETSIJÄ::*}
+		add arg-1 to {ETSIJÄ::*}
+		add arg-2 to {ETSIJÄ::*}
+		broadcast "&e%{ETSIJÄ::*}% &6Ovat nyt etsijiä!"
+		give player unbreakable diamond sword named "&x&f&f&7&b&2&5&lP&x&f&f&8&4&2&2&lu&x&f&f&8&e&1&f&lu&x&f&f&9&7&1&c&lk&x&f&f&a&1&1&9&lk&x&f&f&a&a&1&6&lo"
+		give player rabbit foot named "&aLoikka 3x"
+		give player rabbit foot named "&cLoikka 5x"
+		give player bell named "&bPienennä aluetta"
+		give arg-2 unbreakable diamond sword named "&x&f&f&7&b&2&5&lP&x&f&f&8&4&2&2&lu&x&f&f&8&e&1&f&lu&x&f&f&9&7&1&c&lk&x&f&f&a&1&1&9&lk&x&f&f&a&a&1&6&lo"
+		give arg-2 rabbit foot named "&aLoikka 3x"
+		give arg-2 rabbit foot named "&cLoikka 5x"
+		give arg-2 bell named "&bPienennä aluetta"
+		
+
+		
+command /viesti <text>:
+	permission: op
+	trigger:
+		broadcast "%arg-1%"
+command /poista <player>:
+	permission: op
+	trigger:
+		remove arg-1 from {PELAAJA::*}
+		remove arg-1 from {VOITTO::*}
+		remove 1 from {hengissä}
+		set {PELAAJA::%arg-1%} to false
