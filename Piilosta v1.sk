@@ -242,7 +242,7 @@ command /etsijä <player>:
         
 on damage:
 	if world is "%{maailma}%":
-		if attacker is player:
+		if attacker is a player:
 			if attacker is not {ETSIJÄ::*}:
 				cancel event
 			else:
